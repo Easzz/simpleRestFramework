@@ -12,6 +12,7 @@ public class DispatcherServlet extends AbstractBasicServlet {
 	@Override
 	public void service(HttpServletRequest req, HttpServletResponse resp) {
 		ResponseHandler responseHandler = new ResponseHandler(req, resp);
+
 		responseHandler.service();
 	}
 }
