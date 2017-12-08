@@ -13,7 +13,7 @@
 	<servlet>
 		<servlet-name>ServletDispatcher</servlet-name>
 		<servlet-class>
-			BasicServlet
+			com.easzz.servlet.DispatcherServlet
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

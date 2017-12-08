@@ -1,4 +1,6 @@
-import com.easzz.handler.ResponseHandler;
+package com.easzz.servlet;
+
+import com.easzz.compoent.ComponentsLoader;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by easzz on 2017/11/18 19:35
  */
-public class BasicServlet extends HttpServlet {
+public abstract class AbstractBasicServlet extends HttpServlet {
 	private ComponentsLoader componentsLoader;
 
 	@Override
@@ -19,16 +21,15 @@ public class BasicServlet extends HttpServlet {
 		componentsLoader.init();
 	}
 
+	public abstract void service(HttpServletRequest req, HttpServletResponse resp);
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ResponseHandler responseHandler=new ResponseHandler(req,resp);
-
-		System.out.println();
-
+		service(req, resp);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doPost(req, resp);
+		service(req, resp);
 	}
 }

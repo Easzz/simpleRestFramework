@@ -1,3 +1,5 @@
+package com.easzz.compoent;
+
 import org.springframework.web.context.ContextLoader;
 
 /**
