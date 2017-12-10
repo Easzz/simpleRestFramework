@@ -1,6 +1,6 @@
 package com.easzz.servlet;
 
-import com.easzz.handler.ResponseHandler;
+import com.easzz.handler.response.ResponseHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

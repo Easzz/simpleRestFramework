@@ -1,4 +1,4 @@
-package com.easzz.handler;
+package com.easzz.handler.response;
 
 import com.alibaba.fastjson.JSON;
 import com.easzz.compoent.Action;
