@@ -22,11 +22,14 @@ public class ActionControllerImpl extends AbstractActionController {
 
 		IResponseHandler iResponseHandler = AbstractResponseFactory.buildResponse(iRequestContext);
 		ExecutorService executorService= Executors.newFixedThreadPool(10);
+		//执行方法，得到返回值
 		Future<Object> result = executorService.submit(new Callable<Object>() {
 			@Override
 			public Object call() throws Exception {
 				return null;
 			}
 		});
+		//处理返回的数据
+		iResponseHandler.handler(result);
 	}
 }

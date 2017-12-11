@@ -11,7 +11,6 @@ import java.util.Map;
 public class Action {
 	private static Map<String, ActionBean> actionBeanMap;
 
-
 	public static ActionBean getActionBeanMap(String path) {
 		return actionBeanMap.get(path);
 	}

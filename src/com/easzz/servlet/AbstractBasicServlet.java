@@ -32,4 +32,5 @@ public abstract class AbstractBasicServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		service(req, resp);
 	}
+
 }
