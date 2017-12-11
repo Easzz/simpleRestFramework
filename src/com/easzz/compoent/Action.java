@@ -19,6 +19,8 @@ public class Action {
 		actionBeanMap = new HashMap<>();
 		for (String s : beanMap.keySet()) {
 			Object o = beanMap.get(s);
+
+
 			Class<?> clazz = o.getClass();
 			String classPath = clazz.getAnnotation(Path.class).value();
 			Method[] methods = clazz.getDeclaredMethods();
