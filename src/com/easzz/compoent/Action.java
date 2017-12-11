@@ -27,6 +27,7 @@ public class Action {
 					String methodPath = method.getAnnotation(Path.class).value();
 					String path = "/rest" + classPath + methodPath;
 					//放入map容器
+
 					System.out.println(path);
 					actionBeanMap.put(path, new ActionBean(clazz, method));
 				}
