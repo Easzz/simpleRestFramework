@@ -18,7 +18,7 @@ public abstract class AbstractBasicServlet extends HttpServlet {
 	public void init() throws ServletException {
 		//初始化装在bean
 		componentsLoader = new ComponentsLoader();
-		componentsLoader.init();
+	//	componentsLoader.init();
 	}
 
 	public abstract void service(HttpServletRequest req, HttpServletResponse resp);

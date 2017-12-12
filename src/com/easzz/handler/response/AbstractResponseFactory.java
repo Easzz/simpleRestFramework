@@ -12,6 +12,6 @@ public abstract class AbstractResponseFactory {
 		if (IRequestContext.Format.JSON == context.getFormat()) {
 			return new JsonResponseHandler(context);
 		}
-		return null;
+		return new JsonResponseHandler(context);
 	}
 }

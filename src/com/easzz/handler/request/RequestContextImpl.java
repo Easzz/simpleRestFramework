@@ -18,11 +18,11 @@ public class RequestContextImpl extends AbstractRequestContext {
 
 	@Override
 	public HttpServletRequest getRequest() {
-		return null;
+		return request;
 	}
 
 	@Override
 	public HttpServletResponse getResponse() {
-		return null;
+		return response;
 	}
 }
