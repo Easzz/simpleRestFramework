@@ -2,11 +2,12 @@ package com.easzz.handler.action;
 
 import com.easzz.compoent.Action;
 import com.easzz.compoent.ActionBean;
+import com.easzz.handler.request.AbstractRequestContext;
 import com.easzz.handler.request.IRequestContext;
 import com.easzz.handler.response.AbstractResponseFactory;
 import com.easzz.handler.response.IResponseHandler;
 
-import java.util.concurrent.Callable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -18,18 +19,33 @@ import java.util.concurrent.Future;
 public class ActionControllerImpl extends AbstractActionController {
 	@Override
 	public void service(IRequestContext iRequestContext) {
-		ActionBean action = Action.getActionBeanMap(iRequestContext.getPath());
+
+		final ActionBean action = Action.getActionBeanMap(iRequestContext.getPath());
 
 		IResponseHandler iResponseHandler = AbstractResponseFactory.buildResponse(iRequestContext);
-		ExecutorService executorService= Executors.newFixedThreadPool(10);
+		//设置request 线程
+		AbstractRequestContext.setCurrentRequestContext(iRequestContext);
+
+		ExecutorService executorService = Executors.newFixedThreadPool(10);
 		//执行方法，得到返回值
-		Future<Object> result = executorService.submit(new Callable<Object>() {
-			@Override
-			public Object call() throws Exception {
-				return null;
-			}
-		});
 		//处理返回的数据
-		iResponseHandler.handler(result);
+		try {
+			Future<Object> f = executorService.submit(new AsyncTask() {
+				public Object doCall() {
+					try {
+						return action.getMethod().invoke(action.getO());
+					} catch (IllegalAccessException | InvocationTargetException e) {
+						e.printStackTrace();
+					}
+					return null;
+				}
+			});
+			Object v = f.get();
+			iResponseHandler.handler(v);
+		} catch (Throwable t) {
+
+		} finally {
+			AbstractRequestContext.cleanup();
+		}
 	}
 }

@@ -1,22 +1,30 @@
 package com.easzz.handler.action;
 
+import com.easzz.handler.request.AbstractRequestContext;
+import com.easzz.handler.request.IRequestContext;
+
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by easzz on 2017/12/10 11:49
  */
-public class AsyncTask implements Callable<Object> {
-	private int taskCount;
-	private ExecutorService executorService;
+public abstract class AsyncTask implements Callable<Object> {
+	private IRequestContext iRequestContext;
 
 	public AsyncTask() {
-		executorService = Executors.newFixedThreadPool(taskCount);
+		iRequestContext = AbstractRequestContext.getContextHolder();
 	}
 
 	@Override
 	public Object call() throws Exception {
-		return executorService.submit(new AsyncTask());
+		//设置当前线程request
+		try {
+			AbstractRequestContext.setCurrentRequestContext(iRequestContext);
+			return doCall();
+		} finally {
+			AbstractRequestContext.cleanup();
+		}
 	}
+
+	public abstract Object doCall();
 }
