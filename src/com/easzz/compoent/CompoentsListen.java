@@ -5,7 +5,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.Path;
-import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
@@ -18,16 +17,11 @@ public class CompoentsListen implements ApplicationListener<ContextRefreshedEven
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+		System.out.println("onApplicationEvent start...");
 		if (contextRefreshedEvent.getApplicationContext().getParent() == null) {
+
 			//获取包含特定注解的bean
 			Map<String, Object> objectMap = contextRefreshedEvent.getApplicationContext().getBeansWithAnnotation(Path.class);
-			for (String s : objectMap.keySet()) {
-				Object o = objectMap.get(s);
-				Method[] declaredMethods = o.getClass().getDeclaredMethods();
-				for (Method declaredMethod : declaredMethods) {
-					System.out.println(declaredMethod.getName());
-				}
-			}
 			Action.init(objectMap);
 		}
 	}

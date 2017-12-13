@@ -6,23 +6,23 @@ import java.lang.reflect.Method;
  * Created by easzz on 2017/11/19 10:42
  */
 public class ActionBean {
-	private Class<?> aClass;
+	private Object o;
 	private Method method;
 
-	public ActionBean(Class<?> aClass, Method method) {
-		this.aClass = aClass;
+	public ActionBean(Object o, Method method) {
+		this.o = o;
 		this.method = method;
 	}
 
 	public ActionBean() {
 	}
 
-	public Class<?> getaClass() {
-		return aClass;
+	public Object getO() {
+		return o;
 	}
 
-	public void setaClass(Class<?> aClass) {
-		this.aClass = aClass;
+	public void setO(Object o) {
+		this.o = o;
 	}
 
 	public Method getMethod() {
